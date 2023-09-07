@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Contacts = ({ contacts, filter, onFilterChange }) => {
-  
+const Contacts = ({ contacts }) => {
   return (
     <>
-
       <ul>
         {contacts.map(({ name, id, number }) => {
           return (

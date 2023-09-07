@@ -25,11 +25,19 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  onSubmitForm = () => {
-    const { name, number } = this.state;
+  onSubmitForm = e => {
+    const newContactName = this.state.name;
+    const { name, number, contacts } = this.state;
+    const isContact = contacts.find(({ name }) => name === newContactName);
+
+    if (isContact) {
+      alert(`${name} is already exists`);
+      return;
+    }
     const newContact = { name, id: nanoid(), number };
-    this.setState(prev => {
-      return { contacts: [newContact, ...prev.contacts], name: '', number: '' };
+
+    this.setState(({contacts}) => {
+      return { contacts: [newContact, ...contacts], name: '', number: '' };
     });
   };
 
