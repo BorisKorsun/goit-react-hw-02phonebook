@@ -8,8 +8,8 @@ import Contacts from './Phonebook/Contacts/';
 class App extends Component {
   state = {
     contacts: [
-      { name: 'Garry', id: 1 },
-      { name: 'Simpson', id: 2 },
+      { name: 'Garry', id: 1, number: "+380688775028" },
+      { name: 'Simpson', id: 2, number: "+3801223649"},
     ],
     name: '',
     number: '',
@@ -22,22 +22,23 @@ class App extends Component {
   };
 
   onSubmitForm = () => {
-    const { name } = this.state;
-    const newContact = { name, id: nanoid() };
+    const { name, number } = this.state;
+    const newContact = { name, id: nanoid(), number };
     this.setState(prev => {
-      return { contacts: [newContact, ...prev.contacts], name: '' };
+      return { contacts: [newContact, ...prev.contacts], name: '', number: '' };
     });
   };
 
   render() {
-    const { name, contacts } = this.state;
+    const { name, contacts, number } = this.state;
 
     return (
       <>
         <Section title="Phonebook">
           <Phonebook
             onSubmit={this.onSubmitForm}
-            value={name}
+            name={name}
+            number={number}
             onChange={this.onInputChange}
           />
         </Section>

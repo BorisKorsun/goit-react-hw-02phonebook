@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 const Contacts = ({ contacts }) => {
   return (
     <ul>
-      {contacts.map(({ name, id }) => {
-        return <li key={id}>{name}</li>;
+      {contacts.map(({ name, id, number }) => {
+        return (
+          <li key={id}>
+            {name}: {number}
+          </li>
+        );
       })}
     </ul>
   );

@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types';
 
-const Phonebook = ({ value, onChange, onSubmit }) => {
+const Phonebook = ({ name, number, onChange, onSubmit }) => {
   const initialValue = {
     name: '',
   };
@@ -15,7 +15,16 @@ const Phonebook = ({ value, onChange, onSubmit }) => {
               autoComplete="off"
               onChange={onChange}
               name="name"
-              value={value}
+              value={name}
+            />
+          </label>
+          <label>
+            Number{' '}
+            <Field
+              autoComplete="off"
+              onChange={onChange}
+              name="number"
+              value={number}
             />
           </label>
           <button type="submit">Add contact</button>
@@ -28,7 +37,8 @@ const Phonebook = ({ value, onChange, onSubmit }) => {
 export default Phonebook;
 
 Phonebook.propTypes = {
-  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
