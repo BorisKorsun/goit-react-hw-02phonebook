@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 
 import Section from 'components/Section';
 import Phonebook from 'components/Phonebook';
+import Contacts from './Phonebook/Contacts/';
 
 class App extends Component {
   state = {
@@ -27,7 +28,7 @@ class App extends Component {
   };
 
   render() {
-    const { name } = this.state;
+    const { name, contacts } = this.state;
 
     return (
       <>
@@ -37,6 +38,9 @@ class App extends Component {
             value={name}
             onChange={this.onInputChange}
           />
+        </Section>
+        <Section title="Contacts">
+          <Contacts contacts={contacts} />
         </Section>
       </>
     );
