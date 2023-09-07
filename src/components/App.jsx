@@ -8,11 +8,12 @@ import Contacts from './Phonebook/Contacts/';
 class App extends Component {
   state = {
     contacts: [
-      { name: 'Garry', id: 1, number: "+380688775028" },
-      { name: 'Simpson', id: 2, number: "+3801223649"},
+      { name: 'Garry', id: 1, number: '+380688775028' },
+      { name: 'Simpson', id: 2, number: '+3801223649' },
     ],
     name: '',
     number: '',
+    filter: '',
   };
 
   onInputChange = e => {
@@ -29,8 +30,16 @@ class App extends Component {
     });
   };
 
+  filterContacts = () => {
+    const { filter, contacts } = this.state;
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   render() {
-    const { name, contacts, number } = this.state;
+    const { name, number, filter } = this.state;
+    const filteredContacts = this.filterContacts();
 
     return (
       <>
@@ -43,7 +52,7 @@ class App extends Component {
           />
         </Section>
         <Section title="Contacts">
-          <Contacts contacts={contacts} />
+          <Contacts filter={filter} onFilterChange={this.onInputChange} contacts={filteredContacts} />
         </Section>
       </>
     );
