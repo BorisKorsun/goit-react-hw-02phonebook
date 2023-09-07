@@ -36,9 +36,16 @@ class App extends Component {
     }
     const newContact = { name, id: nanoid(), number };
 
-    this.setState(({contacts}) => {
+    this.setState(({ contacts }) => {
       return { contacts: [newContact, ...contacts], name: '', number: '' };
     });
+  };
+
+  onDeleteBtnClick = deleteId => {
+    const { contacts } = this.state;
+
+    const newContactList = contacts.filter(({id}) => id !== deleteId)
+    this.setState({contacts: newContactList});
   };
 
   filterContacts = () => {
@@ -64,7 +71,7 @@ class App extends Component {
         </Section>
         <Section title="Contacts">
           <Filter filter={filter} onFilterChange={this.onInputChange} />
-          <Contacts contacts={filteredContacts} />
+          <Contacts contacts={filteredContacts} onButtonClick={this.onDeleteBtnClick}/>
         </Section>
       </>
     );
