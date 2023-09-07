@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Contacts = ({ contacts }) => {
   return (
     <ul>
@@ -9,3 +11,12 @@ const Contacts = ({ contacts }) => {
 };
 
 export default Contacts;
+
+Contacts.propType = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

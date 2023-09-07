@@ -12,11 +12,13 @@ class App extends Component {
       { name: 'Simpson', id: 2 },
     ],
     name: '',
+    number: '',
   };
 
   onInputChange = e => {
     const value = e.target.value;
-    this.setState({ name: value });
+    const { name } = e.target;
+    this.setState({ [name]: value });
   };
 
   onSubmitForm = () => {
