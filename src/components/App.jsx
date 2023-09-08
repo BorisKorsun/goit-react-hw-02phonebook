@@ -18,6 +18,20 @@ class App extends Component {
     number: '',
     filter: '',
   };
+  componentDidUpdate() {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
+
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    console.log(contacts);
+
+    if (contacts) {
+      this.setState({
+        contacts: contacts,
+      });
+    }
+  }
 
   onInputChange = e => {
     const value = e.target.value;
@@ -44,8 +58,8 @@ class App extends Component {
   onDeleteBtnClick = deleteId => {
     const { contacts } = this.state;
 
-    const newContactList = contacts.filter(({id}) => id !== deleteId)
-    this.setState({contacts: newContactList});
+    const newContactList = contacts.filter(({ id }) => id !== deleteId);
+    this.setState({ contacts: newContactList });
   };
 
   filterContacts = () => {
@@ -71,7 +85,10 @@ class App extends Component {
         </Section>
         <Section title="Contacts">
           <Filter filter={filter} onFilterChange={this.onInputChange} />
-          <Contacts contacts={filteredContacts} onButtonClick={this.onDeleteBtnClick}/>
+          <Contacts
+            contacts={filteredContacts}
+            onButtonClick={this.onDeleteBtnClick}
+          />
         </Section>
       </>
     );
